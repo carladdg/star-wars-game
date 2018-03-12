@@ -1,0 +1,35 @@
+.game-content {
+    display: flex;
+}
+
+.characters {
+    display: flex;
+    justify-content: center;
+}
+
+.character-container {
+    width: 250px;
+    padding-bottom: 5px;
+    border: 1px solid #000000;
+    text-align: center;
+}
+
+.character-container img {
+    width: 100%;
+}
+
+.inactive-opponents {
+    display: flex;
+}
+
+.fighters {
+    display: flex;
+}
+
+#attack-button {
+    display: none;
+}
+
+#restart-button {
+    display: none;
+}

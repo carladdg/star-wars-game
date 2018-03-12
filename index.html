@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Star Wars RPG</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+<body>
+    <header class="game-title">
+        <h1>Star Wars RPG</h1> 
+    </header>
+    <section class="game-content">
+        <div class="game-selection-area">
+            <div>
+                <h1 id="character-text">Choose Your Fighter</h1>
+            </div>
+            <div class="characters">
+                <div class="character-container" id="luke-skywalker">
+                    <img src="./assets/img/luke-skywalker.jpg" alt="Luke Skywalker">
+                    <p>Luke Skywalker</p>
+                    <p>HP: <span id="luke-skywalker-health">100</span></p>
+                </div>
+                <div class="character-container" id="obi-wan-kenobi">
+                    <img src="./assets/img/obi-wan-kenobi.jpg" alt="Obi-Wan Kenobi">
+                    <p>Obi-Wan Kenobi</p>
+                    <p>HP: <span id="obi-wan-kenobi-health">120</span></p>
+                </div>
+                <div class="character-container" id="darth-sidious">
+                    <img src="./assets/img/darth-sidious.jpg" alt="Darth Sidious">
+                    <p>Darth Sidious</p>
+                    <p>HP: <span id="darth-sidious-health">150</span></p>
+                </div>
+                <div class="character-container" id="darth-maul">
+                    <img src="./assets/img/darth-maul.jpg" alt="Darth Maul">
+                    <p>Darth Maul</p>
+                    <p>HP: <span id="darth-maul-health">180</span></p>
+                </div>
+            </div>
+            <div>
+                <h1 id="inactive-opponent-text"></h1>
+            </div>
+            <div class="inactive-opponents"></div>
+        </div>
+        <div class="game-battleground-area">
+            <div>
+                <h1 id="battleground-text"></h1>
+            </div>
+            <div class="fighters"> 
+                <button id="attack-button">Attack!</button>
+            </div>
+            <button id="restart-button">Play Again</button>
+            <div>
+                <h1 id="attack-results"></h1>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="./assets/js/game.js"></script>
+</body>
+</html>
