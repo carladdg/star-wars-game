@@ -26,13 +26,13 @@ class character {
 // Game properties and methods
 
 var rpgGame = {
-    lukeSkywalker: new character("Luke Skywalker", "#luke-skywalker", 100, 15, 5),
+    lukeSkywalker: new character("Luke Skywalker", "#luke-skywalker", 100, 20, 5),
 
     obiWanKenobi: new character("Obi-Wan Kenobi", "#obi-wan-kenobi", 120, 12, 10),
 
-    darthSidious: new character("Darth Sidious", "#darth-sidious", 150, 10, 15),
+    darthSidious: new character("Darth Sidious", "#darth-sidious", 150, 5, 15),
 
-    darthMaul: new character("Darth Maul", "#darth-maul", 180, 5, 20),
+    darthMaul: new character("Darth Maul", "#darth-maul", 180, 2, 19),
 
     characterIsSelected: false,
 
