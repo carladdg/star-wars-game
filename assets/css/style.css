@@ -1,8 +1,68 @@
-.game-content {
-    display: flex;
+:root {
+    --title-font: 'Press Start 2P', cursive;
+    --title-outline: 
+        -2px -2px 10px var(--black),
+        2px -2px 10px var(--black),
+        -2px 2px 10px var(--black),
+        2px 2px 10px var(--black);
+    --text-font: 'Roboto Condensed', sans-serif;
+    --text-outline: 
+        -2px -2px 10px var(--white),
+        2px -2px 10px var(--white),
+        -2px 2px 10px var(--white),
+        2px 2px 10px var(--white);
+    --white: #ffffff;
+    --black: #000000;
+    --red: #CE2C0A;
+    --green: #0CAD1A;
+    --blue: #1D2FE3;
 }
 
-.characters {
+body {
+    background-image: url("./../img/space.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.game-title {
+    margin-top: 20px;
+
+    text-align: center;
+    color: var(--white);
+    font-family: var(--title-font);
+    text-shadow: var(--title-outline);
+    font-size: 3em;
+}
+
+.game-content {
+    display: flex;
+    justify-content: space-around;
+
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.game-selection-area {
+    text-align: center;
+    width: 100%;
+}
+
+.game-battleground-area {
+    text-align: center;
+}
+
+#character-text, #inactive-opponent-text, #battleground-text {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    
+    color: var(--white);
+    font-family: var(--title-font);
+    text-shadow: var(--title-outline);
+    font-size: 1.5em;
+}
+
+.characters, .inactive-opponents, .fighters {
     display: flex;
     justify-content: center;
 }
@@ -10,7 +70,9 @@
 .character-container {
     width: 250px;
     padding-bottom: 5px;
-    border: 1px solid #000000;
+
+    border: 10px solid var(--black);
+    background: var(--white);
     text-align: center;
 }
 
@@ -18,18 +80,47 @@
     width: 100%;
 }
 
-.inactive-opponents {
-    display: flex;
+.character-container p {
+    padding-top: 5px;
+    
+    font-family: var(--text-font);
 }
 
-.fighters {
-    display: flex;
+.character-container span {
+    font-weight: 700;
+}
+
+#attack-button, #restart-button {
+    display: none;
+    font-family: var(--text-font);
 }
 
 #attack-button {
-    display: none;
+    border: 5px solid var(--black);
+    font-size: 1em;
 }
 
 #restart-button {
-    display: none;
+    margin-top: 20px;
+    border: 3px solid var(--black);
+    font-size: 1.5em;
+}
+
+#attack-button:active {
+    background: var(--red);
+}
+
+#restart-button:active {
+    background: var(--blue);
+}
+
+#attack-button:focus, #restart-button:focus {
+    outline: none;
+}
+
+#attack-results {
+    margin-top: 25px;
+    font-family: var(--text-font);
+    text-shadow: var(--text-outline);
+    font-size: 1.5em;
 }

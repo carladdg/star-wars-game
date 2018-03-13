@@ -61,8 +61,9 @@ var rpgGame = {
     assignSelectedCharacter: function(userSelection) {
         if (!this.characterIsSelected) {
             this.selectedCharacter = userSelection;
-            $("#character-text").text("You are " + this.selectedCharacter.name + "!");
             this.characterIsSelected = true;
+
+            $("#character-text").text("You are " + this.selectedCharacter.name + "!");
         }
     }, 
 
@@ -74,7 +75,7 @@ var rpgGame = {
     },
 
     attackOpponent: function() {
-        $("#attack-results").html("You attacked " + this.activeOpponent.name + " for " + this.selectedCharacter.currentAttackPower + " damage. <br>" + this.activeOpponent.name + " attacked you back for " + this.activeOpponent.currentAttackPower + " damage.");
+        $("#attack-results").html("You attacked " + this.activeOpponent.name + " for " + this.selectedCharacter.currentAttackPower + " damage. <br>" + this.activeOpponent.name + " attacked you back for " + this.activeOpponent.counterAttackPower + " damage.");
         
         this.activeOpponent.currentHealthPoints -= this.selectedCharacter.currentAttackPower
         $(this.activeOpponent.id + "-health").text(this.activeOpponent.currentHealthPoints);
@@ -92,53 +93,66 @@ var rpgGame = {
             this.opponentIsActive = false;
 
             if (this.numberOfOpponentsRemaining > 0) {
+                this.endBattle();
                 this.winBattle();
-                $("#battleground-text").html("You beat " + this.activeOpponent.name + "! <br>" + this.numberOfOpponentsRemaining + " opponents left.");
+                $("#battleground-text").html("You beat " + this.activeOpponent.name + "! <br><br>" + this.numberOfOpponentsRemaining + " left to beat.");
+                $(this.selectedCharacter.id).detach().appendTo(".characters");
+                $("#inactive-opponent-text, .character-container").css("opacity", "1");
             } else {
+                this.endBattle();
                 this.winBattle();
+                this.endGame();
                 $("#battleground-text").text("You won!");
-                $("#inactive-opponent-text").text("");
-                $("#restart-button").show();
+                $(this.selectedCharacter.id).css("border-color", "var(--green)");
             }
         }
         
         if (this.selectedCharacter.currentHealthPoints <= 0) {
+            this.endBattle();
             this.loseBattle();
+            this.endGame();
             $("#battleground-text").text("You lost!");
-            $("#inactive-opponent-text").text("");
-            $("#restart-button").show();
+            $(this.activeOpponent.id).css("border-color", "var(--red)");
         }
     },
 
-    winBattle: function() {
-        $(this.selectedCharacter.id).detach().appendTo(".characters");
-        $(this.activeOpponent.id).hide();
+    endBattle: function() {
         $("#attack-button").hide(); 
         $("#attack-results").html("");
+    },
+
+    winBattle: function() {
+        $(this.activeOpponent.id).hide();
     },
 
     loseBattle: function() {
         $(this.selectedCharacter.id).hide();
-        $("#attack-button").hide(); 
-        $("#attack-results").html("");
+    },
+
+    endGame: function() {
+        $(".game-selection-area").hide();
+        $("#restart-button").show();
     },
 
     restartGame: function() {
+        this.lukeSkywalker.reset();
+        this.obiWanKenobi.reset();
+        this.darthSidious.reset();
+        this.darthMaul.reset();
+        
         this.characterIsSelected = false;
         this.selectedCharacter = {};
         this.opponentIsActive = false;
         this.activeOpponent = {};
         this.numberOfOpponentsRemaining = 3;
 
+        $(".game-selection-area").show();
         $("#character-text").text("Choose Your Fighter");
-        $("#inactive-opponent-text").text("");
-        $("#battleground-text").text("");
+        $(".character-container, #inactive-opponent-text").css("opacity", "1");
+        $(".character-container").css("border-color", "var(--black)");
+        $("#inactive-opponent-text, #battleground-text").text("");
+        $(".game-battleground-area").css("width", "");
         $("#restart-button").hide();
-
-        this.lukeSkywalker.reset();
-        this.obiWanKenobi.reset();
-        this.darthSidious.reset();
-        this.darthMaul.reset();
     }
 }
 
@@ -168,10 +182,14 @@ $(".inactive-opponents").on("click", function(event) {
         rpgGame.assignActiveOpponent(userSelection);
     }
     
+    $(".game-battleground-area").css("width", "100%");
     $("#battleground-text").text("May the Force Be With You!")
     $(rpgGame.selectedCharacter.id).detach().prependTo(".fighters");
     $("#attack-button").show();
     $(rpgGame.activeOpponent.id).detach().appendTo(".fighters");
+    
+    $("#inactive-opponent-text").css("opacity", "0.5");
+    $(".character-container").not(rpgGame.selectedCharacter.id).not(rpgGame.activeOpponent.id).css("opacity", "0.5");
 })
 
 $("#attack-button").on("click", function() {
