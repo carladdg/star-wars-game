@@ -18,6 +18,10 @@
     --blue: #1D2FE3;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     background-image: url("./../img/space.jpg");
     background-repeat: no-repeat;
